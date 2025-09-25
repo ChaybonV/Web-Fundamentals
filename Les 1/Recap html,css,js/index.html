@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body{
+                background-color: green;
+            }
+            h1,h2,h3{
+                color: yellow;
+            }
+            h1.heading{
+                color: red;
+            }
+            .heading{
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- First block -->
+         <div style="background-color: pink;">
+            <!-- <img src="images/lion.png"> -->
+            <h1 class="heading">
+                Chaybon Verlooy Portfolio
+            </h1>
+
+            <a href="https://collinvandervorst.be" target="_blank">
+                Go to portfolio 
+            </a>
+         </div>
+
+        <h2>
+            1. Introduction
+        </h2>
+        <p>
+            Hello,<br>
+            Welcome to my website.<br>
+            Hope you like it.<br>
+        </p>
+        <h2>
+            2. Work
+        </h2>
+
+        <h3>
+            2.1 Schoolwork
+        </h3>
+        <h3>
+            2.2 Freelance work
+        </h3>
+        <h2>
+            3. Contact
+        </h2>
+        <form>
+            <input type="text" placeholder="Firstname" id="fname">
+        </form>
+
+        <button class="js-button">
+            Say Hello
+        </button>
+
+        <script>
+            var buttonElement = document.querySelector(".js-button");
+            buttonElement.addEventListener("click",function(){
+                sayHello("HALLO JE HEBT OP MIJ GEKLIKT");
+            })
+            // Variables
+            var firstname = "Chaybon";
+            var age = 19;
+            var height = 1.85;
+            var isMarried = false;
+
+            if(isMarried == true){
+                console.log("Bye Bye Life");
+            }
+            else{
+                console.log("Enjoy while you can");
+            }
+
+            switch(firstname){
+                case "Chaybon":
+                    console.log("My name");
+                    break;
+            }
+
+            for(var i=1;i<=10;i++){
+                console.log(i);
+            }
+
+            var goats = ["T-rex","Connie","Clyde"];
+            goats.push("insest goat");
+            console.log(goats.length);
+
+            function sayHello(name){
+                console.log("Hello "+name);
+            }
+            sayHello("Chaybon");
+
+            var products = {
+                "id": 50,
+                "name": "Sneakers",
+                "shops": ["dmd","bxl"]
+            }
+        </script>
+    </body> 
+</html>

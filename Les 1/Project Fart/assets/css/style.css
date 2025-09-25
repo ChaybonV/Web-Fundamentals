@@ -1,0 +1,15 @@
+body{
+    background-color: burlywood;
+}
+h1{
+    font-size: 120px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 10px);
+}
+.letter:hover{
+    color: brown;
+    cursor: pointer;
+}
