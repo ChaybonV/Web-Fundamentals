@@ -1,45 +1,60 @@
-// -------------------------
-// Import packages
-// -------------------------
+// --------------------------------------------
+// Import Packages
+// --------------------------------------------
 const express = require('express');
 const router = express.Router();
 
-// -------------------------
-// [GET] Songs 
+// --------------------------------------------
+// [GET] songs 
 // return array of songs
-// -------------------------
-router.get('/', (req, res) => {
-  // @todo: link to database
+// --------------------------------------------
+
+router.get('/', (req, res) => { 
+  // @todo: Link to database
   res.json([]);
 })
 
-// -------------------------
-// [POST] Songs 
-// return id (id kan ook null zijn, niet gelukt )
-// -------------------------
-router.post('/', (req, res) => {
-    // @todo: link to database
-    // req.body -> om data uit een post te halen
-    res.send("Added Songs");
+// --------------------------------------------
+// [POST] song 
+// return id (id can be null, in which case it didn't work)
+// --------------------------------------------
+
+router.post('/', (req, res) => { 
+  //@todo: link to database
+  //req.body
+  res.send("Added songs");
 })
 
-// -------------------------
-// [DELETE] Songs 
-// return boolean (true or false )
-// -------------------------
+// --------------------------------------------
+// [DELETE] song 
+// return boolean (true or false)
+// --------------------------------------------
+
 router.delete('/:id', (req, res) => {
-  // @todo: link to database
-  res.send("Deleted Songs");
+  //@todo: Link to database
+  console.log("Deleted songs");
 })
 
-// -------------------------
-// [PUT] Songs 
-// return boolean (true or false )
-// -------------------------
+// --------------------------------------------
+// [PUT] song 
+// return boolean (true or false)
+// --------------------------------------------
+
 router.put('/:id', (req, res) => {
-  // @todo: link to database
-  // req.body -> om data uit een put te halen
-  res.send("Updated Songs");
+  //@todo: Link to database
+  //req.body
+  res.send("Updated songs");
 })
+
+/*router.get('/:id', (req, res) => {
+  let selectedGoat = null;
+  goats.forEach((goat) => {
+    if(goat.id == req.params.id){
+      selectedGoat = goat;
+    }
+  })
+  //console.log(req.params.id);
+  res.json(selectedGoat);
+})*/
 
 module.exports = router;

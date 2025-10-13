@@ -1,15 +1,16 @@
-// -------------------------
-// Import packages
-// -------------------------
+// --------------------------------------------
+// Import Packages
+// --------------------------------------------
 const express = require('express');
 const router = express.Router();
 
-// -------------------------
-// [GET] Countries 
+// --------------------------------------------
+// [GET] countries 
 // return array of countries
-// -------------------------
-router.get('/', (req, res) => {
-  // @todo: link to database
+// --------------------------------------------
+
+router.get('/', (req, res) => { 
+  // @todo: Link to database
   res.json([]);
 })
 

@@ -1,17 +1,19 @@
-// -------------------------
-// Import packages
-// -------------------------
+// --------------------------------------------
+// Import Packages
+// --------------------------------------------
 const express = require('express');
 const router = express.Router();
 
-// -------------------------
-// [POST] Votes 
-// return id (id kan ook null zijn, niet gelukt )
-// -------------------------
-router.post('/', (req, res) => {
-    // @todo: link to database
-    // req.body -> om data uit een post te halen
-    res.send("Added vote");
+// --------------------------------------------
+// [POST] vote 
+// return id (id can be null, in which case it didn't work)
+// --------------------------------------------
+
+router.post('/', (req, res) => { 
+  //@todo: link to database
+  //req.body
+  res.send("Added vote");
 })
+
 
 module.exports = router;
