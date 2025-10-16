@@ -13,11 +13,11 @@ const prisma = new PrismaClient();
 // -------------------------
 router.get('/', async(req, res) => {
   const songs = await prisma.songs.findMany({
-    include:{
+    include: {
       artists: true
     }
-  });
-  res.json(songs);
+  })
+  res.json(songs)
 })
 
 // -------------------------
