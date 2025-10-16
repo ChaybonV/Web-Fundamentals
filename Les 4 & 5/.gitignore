@@ -4,3 +4,4 @@ package-lock.json
 prisma
 .env
 .env.local
+.env.*.local
