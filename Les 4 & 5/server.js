@@ -1,24 +1,26 @@
-const express = require('express'); // Import from node_modules
-const app = express(); // Functie express(), dit toevoegen aan var app & later settings aan toevoegen.
+// import from node_modules
+const express = require('express')
+
+// blijkbaar bestaat er een functie express(), 
+// ik ga dit toevoegen in de variable app
+// en later settings aan toe voegen
+const app = express()
 app.use(express.json());
-console.log("API is up and running, YIPEEE");
+console.log("API IS UP AND RUNNING, BABY....")
 
-const artistRouter = require("./routes/artists");
-const goatsRouter = require("./routes/goats");
-const songsRouter = require("./routes/songs");
-const countriesRouter = require("./routes/countries");
-const rankingRouter = require("./routes/ranking");
-const votesRouter = require("./routes/votes");
+// Endpoints 
+const artistsRouter = require('./routes/artists');
+const countriesRouter = require('./routes/countries');
+const goatsRouter = require('./routes/goats');
+const rankingRouter = require('./routes/ranking');
+const songsRouter = require('./routes/songs');
+const votesRouter = require('./routes/votes');
 
-app.use("/artists", artistRouter);
-app.use("/goats", goatsRouter);
-app.use("/songs", songsRouter);
-app.use("/countries", countriesRouter);
-app.use("/ranking", rankingRouter);
-app.use("/votes", votesRouter);
+app.use('/artists', artistsRouter);
+app.use('/countries', countriesRouter);
+app.use('/goats', goatsRouter);
+app.use('/ranking', rankingRouter);
+app.use('/songs', songsRouter);
+app.use('/votes', votesRouter);
 
-app.get('/', (req, res) => {
-  res.send('Eurosong API is running 🎶');
-});
-
-app.listen(3000);
+app.listen(3000)

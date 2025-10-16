@@ -1,67 +1,61 @@
-// --------------------------------------------
-// Import Packages
-// --------------------------------------------
+// -------------------------
+// Import packages
+// -------------------------
 const express = require('express');
 const router = express.Router();
 
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
-// --------------------------------------------
-// [GET] songs 
+// -------------------------
+// [GET] Songs 
 // return array of songs
-// --------------------------------------------
-
-router.get('/', async(req, res) => { 
+// -------------------------
+router.get('/', async(req, res) => {
   const songs = await prisma.songs.findMany({
     include:{
       artists: true
     }
   });
-
   res.json(songs);
 })
 
-// --------------------------------------------
-// [POST] song 
-// return id (id can be null, in which case it didn't work)
-// --------------------------------------------
+// -------------------------
+// [POST] Songs 
+// return id (id kan ook null zijn, niet gelukt )
+// -------------------------
+router.post('/', async(req, res) => {
+    const artistId = req.body.artist_id;
+    const songName = req.body.name;
 
-router.post('/', async(req, res) => { 
-  let artistId = req.body.artist_id;
-  let songName = req.body.name;
-
-  // Bestaat de combinatie?
-  const combinationCheck = await prisma.songs.findMany({
-    where:{
-      artist_id: artistId,
-      name: songName
-    }
-  })
-
-  if(combinationCheck>0){
-    res.json({
-      "status":"Combination already exists"
-    })
-  }
-  else{
-    const newSong = await prisma.songs.create({
-      data:{
+    // Bestaat de combinatie? 
+    const combinationCheck = await prisma.songs.findMany({
+      where:{
         artist_id: artistId,
         name: songName
       }
     })
 
-    res.send(newSong);
-  }
+    if(combinationCheck.length>0){
+      res.json({
+        "status": "combination already exists"
+      });
+    }
+    else{
+      const newSong = await prisma.songs.create({
+            data:{
+              artist_id: artistId,
+              name: songName
+            }
+          });
+        res.send(newSong);
+    }
+});
 
-})
-
-// --------------------------------------------
-// [DELETE] song 
-// return boolean (true or false)
-// --------------------------------------------
-
+// -------------------------
+// [DELETE] Songs 
+// return boolean (true or false )
+// -------------------------
 router.delete('/:id', async (req, res) => {
   const songId = req.params.id;
 
@@ -74,11 +68,10 @@ router.delete('/:id', async (req, res) => {
   res.send(deletedSong);
 })
 
-// --------------------------------------------
-// [PUT] song 
-// return boolean (true or false)
-// --------------------------------------------
-
+// -------------------------
+// [PUT] Songs 
+// return boolean (true or false )
+// -------------------------
 router.put('/:id', async (req, res) => {
   let songId = req.params.id;
   let name = req.body.name;
