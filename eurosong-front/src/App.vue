@@ -1,25 +1,23 @@
 <script setup>
   // ----- Import
-  import {ref} from "vue";
+  import {ref,onMounted} from "vue";
 
   // ----- Components
   import Counter from "./components/Counter.vue"
 
   // ----- Data
-  let counters = ref([
-    {
-      "name":"Verlooy",
-      "startValue":2
-    },
-    {
-      "name":"Chaybon",
-      "startValue":0
-    },
-    {
-      "name":"Joeri",
-      "startValue":0
-    }
-  ])
+  let counters = ref([])
+
+  // ----- Lifecycles
+  onMounted(()=>{
+    fetch("https://dummyjson.com/products")
+    .then((response)=>{
+      return response.json();
+    })
+    .then((data)=>{
+      counters.value=data.products;
+    })
+  })
 </script>
 
 <template>
@@ -27,7 +25,7 @@
   <h1>Counter van domme vragen</h1>
 
   <div v-for="(item,index) in counters" :key="index">
-    <Counter v-bind:counterName="item.name" :counterInitialValue="item.startValue"/>
+    <Counter v-bind:counterName="item.title" :counterInitialValue="item.stock"/>
   </div>
 
 </div>

@@ -56,7 +56,7 @@
         <button @click="increment">
             Add
         </button>
-        <br>
+        
         <!-- v-if="showMinButton()" -> use if you want to hide/show button based on value  -->
         <button @click="decrement" :disabled="counterValue<=0">
             Min
