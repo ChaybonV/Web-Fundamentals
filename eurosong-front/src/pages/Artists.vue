@@ -1,78 +1,86 @@
-<!-- Settings van de pagina -->
 
 <script setup>
-// Imports
-import { ref, onMounted } from 'vue';
+    // Imports
+    import { ref, onMounted } from 'vue';
 
-// Data
-let artists = ref([]);
-let newArtistName = ref("");
-
-// Lifecycle
-onMounted(() => {
-    getArtists();
-});
-
-// Methods
-const getArtists = async () => {
-    const res = await fetch("http://localhost:3000/artists");
-    artists.value = await res.json();
-}
-
-const addArtist = async () => {
-    if (!newArtistName.value.trim()) return;
-
-    const res = await fetch("http://localhost:3000/artists", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name: newArtistName.value })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-        newArtistName.value = "";
+    // Life cycles 
+    onMounted(() => {
         getArtists();
-    } else {
-        alert(data.error || data.status);
+    })
+
+    // Data (ref)
+    let artists = ref([]);
+    let newArtistName = ref("");
+
+    // Methods 
+    const getArtists = () => {
+        fetch("http://localhost:3000/artists")
+            .then((res) => res.json())
+            .then((data) => {
+                artists.value = data
+            });
     }
-}
-
-const removeArtist = async (id) => {
-    const res = await fetch(`http://localhost:3000/artists/${id}`, {
-        method: "DELETE"
-    });
-
-    if (!res.ok) {
-        const errorData = await res.json();
-        alert(`Error: ${errorData.error}`);
-        return;
+    const removeArtist = (id) => {
+        fetch("http://localhost:3000/artists/" + id, {
+            method: "DELETE"
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                getArtists();
+            });
     }
 
-    getArtists();
-}
+    const addArtist = () => {
+        fetch("http://localhost:3000/artists/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: newArtistName.value
+            })
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                getArtists();
+            });
+    }
 </script>
 
+<!-- Template -->
 <template>
-  <div>
-    <h1>Artists</h1>
+    <div>
+        <h1>
+            Artists
+        </h1>
 
-    <!-- Voeg een artiest toe -->
-    <input v-model="newArtistName" placeholder="Nieuwe artiest naam" />
-    <button @click="addArtist">Add Artist</button>
+        <ul v-if="artists.length > 0">
+            <li v-for="artist in artists" :key="artist.artist_id">
+                {{ artist.name }}
 
-    <!-- Lijst van artiesten -->
-    <ul v-if="artists.length > 0">
-      <li v-for="artist in artists" :key="artist.artist_id">
-        {{ artist.name }}
-        <button @click="removeArtist(artist.artist_id)">Delete</button>
-      </li>
-    </ul>
+                <button @click="removeArtist(artist.artist_id)">
+                    Delete
+                </button>
+            </li>
+        </ul>
 
-    <p v-else>
-      Geen artiesten beschikbaar
-    </p>
-  </div>
+        <p v-if="artists.length == 0">
+            Geen artiesten beschikbaar
+        </p>
+
+        <hr/>
+
+        <h2>
+            Create new artist
+        </h2>
+
+        <label>
+            Name
+        </label>
+        
+        <input type="text" v-model="newArtistName"/>
+        <button @click="addArtist()">
+            Add new artist
+        </button>
+    </div>
 </template>
